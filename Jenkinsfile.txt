@@ -1,0 +1,35 @@
+pipeline{
+    agent any
+
+    stages{
+        stage("Preparing"){
+            echo "Pulling... ${env.BRANCH_NAME}"
+        }
+        stage("Dev"){
+            when {
+                branch 'dev'
+            }
+            steps{
+                echo 'Pipeline is triggered from Dev branch'
+            }
+        }
+        stage("Test"){
+            when {
+                branch 'release'
+            }
+            steps{
+                echo 'Pipeline is triggered from Release branch'
+            }
+
+        }
+        stage("Prod"){
+            when {
+                branch 'main'
+            }
+            steps{
+                echo 'Pipeline is triggered from Main branch'
+            }
+
+        }
+    }
+}
